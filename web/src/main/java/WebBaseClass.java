@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class WebBaseClass {
-    protected WebDriver driver = null;
+    public WebDriver driver = null;
     static InputStream input;
     static Properties prop = new Properties();
     static WebCapabilities webCapabilities = null;
