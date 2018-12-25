@@ -18,12 +18,12 @@ public class WebBaseClass {
     static {
         try {
             System.out.println(System.getProperty("user.dir"));
-            input = new FileInputStream(
-                System.getProperty("user.dir")+"/enviornment.properties");
+            input = new FileInputStream("/Users/umahaea/Documents/workspace/full-stack-automation/web/enviornment.properties");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
+
 
     @BeforeClass(alwaysRun = true)
     public void setUp() throws IOException {
@@ -31,10 +31,8 @@ public class WebBaseClass {
         webCapabilities =
             new WebCapabilities(prop.getProperty("browser"), prop.getProperty("version"),
                 prop.getProperty("os"), prop.getProperty("osVersion"));
-        System.setProperty("webdriver.chrome.driver",
-            System.getProperty("user.dir")+"/../drivers/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "/Users/umahaea/Documents/workspace/full-stack-automation/drivers/chromedriver");
         driver = new ChromeDriver();
-
     }
 
     @AfterClass(alwaysRun = true)
