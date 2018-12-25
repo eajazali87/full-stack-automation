@@ -2,12 +2,10 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class HelloWorld {
-
+public class HelloWorld extends WebBaseClass{
 
     @Test
     public void test1() throws IOException {
-        WebBaseClass.setUp();
-
+        driver.get("http://www.yahoo.com");
     }
 }

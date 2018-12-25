@@ -1,4 +1,7 @@
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,16 +17,27 @@ public class WebBaseClass {
 
     static {
         try {
-            input =
-                new FileInputStream("/Users/umahaea/Documents/workspace/full-stack-automation/web/enviornment.properties");
+            input = new FileInputStream(
+                "/Users/umahaea/Documents/workspace/full-stack-automation/web/enviornment.properties");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    protected static void setUp() throws IOException {
+    @BeforeClass(alwaysRun = true)
+    public void setUp() throws IOException {
         prop.load(input);
-        webCapabilities = new WebCapabilities(prop.getProperty("browser"),prop.getProperty("version"),prop.getProperty("os"),prop.getProperty("osVersion"));
+        webCapabilities =
+            new WebCapabilities(prop.getProperty("browser"), prop.getProperty("version"),
+                prop.getProperty("os"), prop.getProperty("osVersion"));
+        System.setProperty("webdriver.chrome.driver",
+            "/Users/umahaea/Documents/workspace/full-stack-automation/drivers/chromedriver");
+        driver = new ChromeDriver();
+    }
 
+    @AfterClass(alwaysRun = true)
+    public void tearDown() {
+        driver.close();
+        driver.quit();
     }
 }
