@@ -24,7 +24,6 @@ public class WebBaseClass {
         }
     }
 
-
     @BeforeClass(alwaysRun = true)
     public void setUp() throws IOException {
         prop.load(input);
