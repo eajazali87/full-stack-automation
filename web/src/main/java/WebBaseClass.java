@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Enumeration;
 import java.util.Properties;
 
 public class WebBaseClass {
@@ -27,6 +28,16 @@ public class WebBaseClass {
     @BeforeClass(alwaysRun = true)
     public void setUp() throws IOException {
         prop.load(input);
+        System.out.println(prop.size());
+        Enumeration keys = prop.keys();
+
+        while (keys.hasMoreElements()) {
+            String key = (String)keys.nextElement();
+            String value = (String)prop.get(key);
+            System.out.println(key + ": " + value);
+        }
+
+        
         webCapabilities =
             new WebCapabilities(prop.getProperty("browser"), prop.getProperty("version"),
                 prop.getProperty("os"), prop.getProperty("osVersion"));
