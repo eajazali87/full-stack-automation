@@ -1,6 +1,7 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -10,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Enumeration;
 import java.util.Properties;
 import java.util.TreeMap;
@@ -21,6 +23,9 @@ public class WebBaseClass {
     static WebCap webCap = null;
     SetUpDriver setUpDriver = null;
     AutomateHelpers automate = null;
+    final static String USERNAME = "";
+    final static String ACCESS_KEY = "";
+    final String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
 
     static {
         try {
@@ -82,6 +87,11 @@ public class WebBaseClass {
                 System.out.println(
                     "check the browser name, make sure it is one of these: chrome, firefox, safari, ie, edge");
                 System.exit(1);
+            }
+        }else if(runEnv.equals("sauce")) {
+            if (browser.equals("chrome")) {
+                setUpDriver.chromeDriver(runEnv);
+                driver = new RemoteWebDriver(new URL(URL), null);
             }
         }
         automate = new AutomateHelpers(driver);
