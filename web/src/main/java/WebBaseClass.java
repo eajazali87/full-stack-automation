@@ -2,7 +2,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -73,6 +75,9 @@ public class WebBaseClass {
             setUpDriver.ieDriver();
         }else if(browser.equals("edge")){
             setUpDriver.edgeDriver();
+        }else{
+            System.out.println("check the browser name, make sure it is one of these: chrome, firefox, safari, ie, edge");
+            System.exit(1);
         }
         automate = new AutomateHelpers(driver);
     }
@@ -83,7 +88,6 @@ public class WebBaseClass {
         driver.quit();
     }
 }
-
 
 
 //Add all common methods
