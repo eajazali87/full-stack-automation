@@ -1,5 +1,6 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -21,15 +22,16 @@ public class WebBaseClass {
 
     static {
         try {
-            System.out.println(System.getProperty("user.dir"));
+            System.out.println(System.getProperty("user.dir")+"/web/web.environment.properties");
             input = new FileInputStream(
-                "/Users/umahaea/Documents/workspace/full-stack-automation/web/enviornment.properties");
+                System.getProperty("user.dir")+"/web.environment.properties");
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
         }
     }
 
-    @BeforeClass(alwaysRun = true) public void setUp() throws IOException {
+    @BeforeClass(alwaysRun = true)
+    public void setUp() throws IOException {
         prop.load(input);
         Enumeration propertyName = prop.keys();
         TreeMap<String, String> treeMap = new TreeMap<String, String>();
@@ -63,6 +65,7 @@ public class WebBaseClass {
             driver = new ChromeDriver();
         }else if(browser.equals("firefox")){
             initializeDriver.fireFoxDriver();
+            driver = new FirefoxDriver();
         }else if(browser.equals("safari")){
             initializeDriver.safariDriver();
         }else if(browser.equals("ie")){
@@ -70,7 +73,6 @@ public class WebBaseClass {
         }else if(browser.equals("edge")){
             initializeDriver.edgeDriver();
         }
-
     }
 
     @AfterClass(alwaysRun = true)

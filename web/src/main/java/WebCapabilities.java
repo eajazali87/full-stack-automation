@@ -45,7 +45,7 @@ public class WebCapabilities {
     }
 
 /*    protected static void getCapabilities() throws IOException {
-        InputStream input = new FileInputStream("/Users/umahaea/Documents/workspace/full-stack-automation/web/enviornment.properties");
+        InputStream input = new FileInputStream("/Users/umahaea/Documents/workspace/full-stack-automation/web/web.environment.properties");
         Properties prop = new Properties();
         prop.load(input);
         System.out.println(prop.getProperty("browser"));
