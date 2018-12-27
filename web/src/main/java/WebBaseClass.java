@@ -22,7 +22,6 @@ public class WebBaseClass {
     SetUpDriver setUpDriver = null;
     AutomateHelpers automate = null;
 
-
     static {
         try {
             System.out.println(System.getProperty("user.dir")+"/web/web.environment.properties");
@@ -54,30 +53,36 @@ public class WebBaseClass {
         }
 
         webCap = new WebCap.WebCapBuilder().
-            setBrowser(capabilities[0]).
-            setOs(capabilities[1]).
-            setOsVersion(capabilities[2]).
-            setVersion(capabilities[3]).
+            setRunEnv(capabilities[0]).
+            setBrowser(capabilities[1]).
+            setOs(capabilities[2]).
+            setOsVersion(capabilities[3]).
+            setVersion(capabilities[4]).
             build();
 
-        String browser = capabilities[0];
+        String runEnv = capabilities[0];
+        String browser = capabilities[1];
 
         setUpDriver = new SetUpDriver();
-        if(browser.equals("chrome")){
-            setUpDriver.chromeDriver();
-            driver = new ChromeDriver();
-        }else if(browser.equals("firefox")){
-            setUpDriver.fireFoxDriver();
-            driver = new FirefoxDriver();
-        }else if(browser.equals("safari")){
-            setUpDriver.safariDriver();
-        }else if(browser.equals("ie")){
-            setUpDriver.ieDriver();
-        }else if(browser.equals("edge")){
-            setUpDriver.edgeDriver();
-        }else{
-            System.out.println("check the browser name, make sure it is one of these: chrome, firefox, safari, ie, edge");
-            System.exit(1);
+
+        if(runEnv.equals("local")) {
+            if (browser.equals("chrome")) {
+                setUpDriver.chromeDriver();
+                driver = new ChromeDriver();
+            } else if (browser.equals("firefox")) {
+                setUpDriver.fireFoxDriver();
+                driver = new FirefoxDriver();
+            } else if (browser.equals("safari")) {
+                setUpDriver.safariDriver();
+            } else if (browser.equals("ie")) {
+                setUpDriver.ieDriver();
+            } else if (browser.equals("edge")) {
+                setUpDriver.edgeDriver();
+            } else {
+                System.out.println(
+                    "check the browser name, make sure it is one of these: chrome, firefox, safari, ie, edge");
+                System.exit(1);
+            }
         }
         automate = new AutomateHelpers(driver);
     }
@@ -89,7 +94,6 @@ public class WebBaseClass {
     }
 }
 
-
 //Add all common methods
-// More robustness for capabilities array
 //Introduce local vs sauce set up -> connect to sauce as well
+// More robustness for capabilities array

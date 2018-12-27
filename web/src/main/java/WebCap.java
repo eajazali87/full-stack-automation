@@ -1,15 +1,25 @@
 public class WebCap {
 
+    static String runEnv;
     static String version;
     static String browser;
     static String os;
     static String osVersion;
 
     public WebCap(WebCapBuilder builder) {
+        this.runEnv = builder.runEnv;
         this.version = builder.version;
         this.browser = builder.browser;
         this.os = builder.os;
         this.osVersion = builder.osVersion;
+    }
+
+    public static String getRunEnv() {
+        return runEnv;
+    }
+
+    public static void setRunEnv(String runEnv) {
+        WebCap.runEnv = runEnv;
     }
 
     public String getVersion() {
@@ -45,6 +55,7 @@ public class WebCap {
     }
 
     public static class WebCapBuilder {
+        static String runEnv;
         static String version;
         static String browser;
         static String os;
@@ -52,6 +63,11 @@ public class WebCap {
 
         public WebCapBuilder() {
 
+        }
+
+        public WebCapBuilder setRunEnv(String runEnv) {
+            this.runEnv = runEnv;
+            return this;
         }
 
         public WebCapBuilder setVersion(String version) {
