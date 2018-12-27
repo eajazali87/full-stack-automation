@@ -1,6 +1,6 @@
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class InitializeDriver extends WebBaseClass {
+public class SetUpDriver extends WebBaseClass {
 
     public void chromeDriver() {
         System.setProperty("webdriver.chrome.driver",

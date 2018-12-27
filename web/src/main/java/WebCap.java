@@ -60,7 +60,6 @@ public class WebCap {
         }
 
         public WebCapBuilder setBrowser(String browser) {
-            System.out.println("browser from test_to_consume: "+browser);
             this.browser = browser;
             return this;
         }

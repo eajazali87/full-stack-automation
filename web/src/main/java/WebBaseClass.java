@@ -9,7 +9,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
-import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
 
@@ -18,7 +17,9 @@ public class WebBaseClass {
     static InputStream input;
     static Properties prop = new Properties();
     static WebCap webCap = null;
-    InitializeDriver initializeDriver = null;
+    SetUpDriver setUpDriver = null;
+    AutomateHelpers automate = null;
+
 
     static {
         try {
@@ -59,20 +60,21 @@ public class WebBaseClass {
 
         String browser = capabilities[0];
 
-        initializeDriver = new InitializeDriver();
+        setUpDriver = new SetUpDriver();
         if(browser.equals("chrome")){
-            initializeDriver.chromeDriver();
+            setUpDriver.chromeDriver();
             driver = new ChromeDriver();
         }else if(browser.equals("firefox")){
-            initializeDriver.fireFoxDriver();
+            setUpDriver.fireFoxDriver();
             driver = new FirefoxDriver();
         }else if(browser.equals("safari")){
-            initializeDriver.safariDriver();
+            setUpDriver.safariDriver();
         }else if(browser.equals("ie")){
-            initializeDriver.ieDriver();
+            setUpDriver.ieDriver();
         }else if(browser.equals("edge")){
-            initializeDriver.edgeDriver();
+            setUpDriver.edgeDriver();
         }
+        automate = new AutomateHelpers(driver);
     }
 
     @AfterClass(alwaysRun = true)
@@ -81,3 +83,9 @@ public class WebBaseClass {
         driver.quit();
     }
 }
+
+
+
+//Add all common methods
+// More robustness for capabilities array
+//Introduce local vs sauce set up -> connect to sauce as well
