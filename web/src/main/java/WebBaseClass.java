@@ -17,6 +17,7 @@ public class WebBaseClass {
     static InputStream input;
     static Properties prop = new Properties();
     static WebCap webCap = null;
+    InitializeDriver initializeDriver = null;
 
     static {
         try {
@@ -39,7 +40,7 @@ public class WebBaseClass {
             System.out.println(key + ": " + value);
             treeMap.put(key, value);
         }
-        //System.out.println(treeMap);
+        System.out.println(treeMap);
         String[] capabilities = new String[treeMap.size()];
 
         for (int i = 0; i < treeMap.size(); i++) {
@@ -54,16 +55,26 @@ public class WebBaseClass {
             setVersion(capabilities[3]).
             build();
 
+        String browser = capabilities[0];
 
-        
+        initializeDriver = new InitializeDriver();
+        if(browser.equals("chrome")){
+            initializeDriver.chromeDriver();
+            driver = new ChromeDriver();
+        }else if(browser.equals("firefox")){
+            initializeDriver.fireFoxDriver();
+        }else if(browser.equals("safari")){
+            initializeDriver.safariDriver();
+        }else if(browser.equals("ie")){
+            initializeDriver.ieDriver();
+        }else if(browser.equals("edge")){
+            initializeDriver.edgeDriver();
+        }
 
-
-        System.setProperty("webdriver."+capabilities[0]+".driver",
-            "/Users/umahaea/Documents/workspace/full-stack-automation/drivers/chromedriver");
-        driver = new ChromeDriver();
     }
 
-    @AfterClass(alwaysRun = true) public void tearDown() {
+    @AfterClass(alwaysRun = true)
+    public void tearDown() {
         driver.close();
         driver.quit();
     }
