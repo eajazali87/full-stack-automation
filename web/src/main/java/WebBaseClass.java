@@ -102,8 +102,8 @@ public class WebBaseClass {
                 setDesiredCapabilities();
             }
             driver = new RemoteWebDriver(new URL(URL), desiredCapabilities);
-            automate = new AutomateHelpers(driver);
         }
+        automate = new AutomateHelpers(driver);
     }
 
     public void setDesiredCapabilities() {
