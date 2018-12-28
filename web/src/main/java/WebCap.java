@@ -5,6 +5,9 @@ public class WebCap {
     static String browser;
     static String os;
     static String osVersion;
+    static String apiKey;
+    static String userName;
+
 
     public WebCap(WebCapBuilder builder) {
         this.runEnv = builder.runEnv;
@@ -12,6 +15,8 @@ public class WebCap {
         this.browser = builder.browser;
         this.os = builder.os;
         this.osVersion = builder.osVersion;
+        this.apiKey = builder.apiKey;
+        this.userName = builder.userName;
     }
 
     public static String getRunEnv() {
@@ -54,12 +59,31 @@ public class WebCap {
         this.osVersion = osVersion;
     }
 
+    public static String getApiKey() {
+        return apiKey;
+    }
+
+    public static void setApiKey(String apiKey) {
+        WebCap.apiKey = apiKey;
+    }
+
+    public static String getUserName() {
+        return userName;
+    }
+
+    public static void setUserName(String userName) {
+        WebCap.userName = userName;
+    }
+
+
     public static class WebCapBuilder {
         static String runEnv;
         static String version;
         static String browser;
         static String os;
         static String osVersion;
+        static String apiKey;
+        static String userName;
 
         public WebCapBuilder() {
 
@@ -90,8 +114,19 @@ public class WebCap {
             return this;
         }
 
+        public WebCapBuilder setApiKey(String apiKey) {
+            this.apiKey = apiKey;
+            return this;
+        }
+
+        public WebCapBuilder setUserName(String userName) {
+            this.userName = userName;
+            return this;
+        }
+
         public WebCap build() {
             return new WebCap(this);
         }
+
     }
 }

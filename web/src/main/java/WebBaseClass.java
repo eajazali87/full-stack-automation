@@ -1,6 +1,7 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Enumeration;
+import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
 
@@ -23,25 +25,28 @@ public class WebBaseClass {
     static WebCap webCap = null;
     SetUpDriver setUpDriver = null;
     AutomateHelpers automate = null;
-    final static String USERNAME = "";
-    final static String ACCESS_KEY = "";
-    final String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+    DesiredCapabilities desiredCapabilities = null;
+    TreeMap<String, String> treeMap = null;
+    final static String USERNAME = "p_PDAauto";
+    final static String ACCESS_KEY = "b9d2b44a-7151-43f8-9f4e-d2ae58426773";
+    final String URL =
+        "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
 
     static {
         try {
-            System.out.println(System.getProperty("user.dir")+"/web/web.environment.properties");
-            input = new FileInputStream(
-                System.getProperty("user.dir")+"/web.environment.properties");
+            System.out.println(System.getProperty("user.dir") + "/web/web.environment.properties");
+            input =
+                new FileInputStream(System.getProperty("user.dir") + "/web.environment.properties");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e.getMessage());
         }
     }
 
-    @BeforeClass(alwaysRun = true)
-    public void setUp() throws IOException {
+    @BeforeClass(alwaysRun = true) public void setUp() throws IOException {
         prop.load(input);
+        desiredCapabilities = new DesiredCapabilities();
         Enumeration propertyName = prop.keys();
-        TreeMap<String, String> treeMap = new TreeMap<String, String>();
+        treeMap = new TreeMap<String, String>();
 
         while (propertyName.hasMoreElements()) {
             String key = (String) propertyName.nextElement();
@@ -58,19 +63,21 @@ public class WebBaseClass {
         }
 
         webCap = new WebCap.WebCapBuilder().
-            setRunEnv(capabilities[0]).
-            setBrowser(capabilities[1]).
-            setOs(capabilities[2]).
-            setOsVersion(capabilities[3]).
-            setVersion(capabilities[4]).
+            setBrowser(capabilities[0]).
+            setOs(capabilities[1]).
+            setRunEnv(capabilities[2]).
+            setRunEnv(capabilities[3]).
+            setApiKey(capabilities[4]).
+            setUserName(capabilities[5]).
+            setVersion(capabilities[6]).
             build();
 
-        String runEnv = capabilities[0];
-        String browser = capabilities[1];
+        String runEnv = capabilities[2];
+        String browser = capabilities[0];
 
         setUpDriver = new SetUpDriver();
 
-        if(runEnv.equals("local")) {
+        if (runEnv.equals("local")) {
             if (browser.equals("chrome")) {
                 setUpDriver.chromeDriver();
                 driver = new ChromeDriver();
@@ -88,17 +95,35 @@ public class WebBaseClass {
                     "check the browser name, make sure it is one of these: chrome, firefox, safari, ie, edge");
                 System.exit(1);
             }
-        }else if(runEnv.equals("sauce")) {
+        } else if (runEnv.equals("cloud")) {
             if (browser.equals("chrome")) {
-                setUpDriver.chromeDriver(runEnv);
-                driver = new RemoteWebDriver(new URL(URL), null);
+                desiredCapabilities = DesiredCapabilities.chrome();
+                setDesiredCapabilities();
+            } else if (browser.equals("firefox")) {
+                desiredCapabilities = DesiredCapabilities.firefox();
+                setDesiredCapabilities();
+            } else if (browser.equals("safari")) {
+                desiredCapabilities = DesiredCapabilities.safari();
+                setDesiredCapabilities();
+            } else if (browser.equals("internet explorer")) {
+                desiredCapabilities = DesiredCapabilities.internetExplorer();
+                setDesiredCapabilities();
+            } else if (browser.equals("microsoftedge")) {
+                desiredCapabilities = DesiredCapabilities.edge();
+                setDesiredCapabilities();
             }
+            driver = new RemoteWebDriver(new URL(URL), desiredCapabilities);
+            automate = new AutomateHelpers(driver);
         }
-        automate = new AutomateHelpers(driver);
     }
 
-    @AfterClass(alwaysRun = true)
-    public void tearDown() {
+    public void setDesiredCapabilities() {
+        for (Map.Entry<String, String> m : treeMap.entrySet()) {
+            desiredCapabilities.setCapability(m.getKey(), m.getValue());
+        }
+    }
+
+    @AfterClass(alwaysRun = true) public void tearDown() {
         driver.close();
         driver.quit();
     }

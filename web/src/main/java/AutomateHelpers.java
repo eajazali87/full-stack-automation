@@ -20,7 +20,10 @@ public class AutomateHelpers {
             webElement = driver.findElement(element);
             webElement.click();
         } catch (NoSuchElementException e) {
-            System.out.println(errorColorCode + Thread.currentThread().getStackTrace()[2].getMethodName() + ":" + Thread.currentThread().getStackTrace()[2].getLineNumber() + " - " + element + ": no such element, click operation didn't happen");
+            System.out.println(
+                errorColorCode + Thread.currentThread().getStackTrace()[2].getMethodName() + ":"
+                    + Thread.currentThread().getStackTrace()[2].getLineNumber() + " - " + element
+                    + ": no such element, click operation didn't happen");
         }
     }
 
@@ -31,7 +34,10 @@ public class AutomateHelpers {
             js = (JavascriptExecutor) driver;
             js.executeScript("arguments[0].click();", webElement);
         } catch (NoSuchElementException e) {
-            System.out.println(errorColorCode + Thread.currentThread().getStackTrace()[2].getMethodName() + ":" + Thread.currentThread().getStackTrace()[2].getLineNumber() + " - " + element + ": no such element, click operation using JS didn't happen");
+            System.out.println(
+                errorColorCode + Thread.currentThread().getStackTrace()[2].getMethodName() + ":"
+                    + Thread.currentThread().getStackTrace()[2].getLineNumber() + " - " + element
+                    + ": no such element, click operation using JS didn't happen");
         }
     }
 
@@ -42,7 +48,10 @@ public class AutomateHelpers {
             webElement.clear();
             webElement.sendKeys(text);
         } catch (NoSuchElementException e) {
-            System.out.println(errorColorCode + Thread.currentThread().getStackTrace()[2].getMethodName() + ":" + Thread.currentThread().getStackTrace()[2].getLineNumber() + " - " + element + ": no such element, sendkeys operation didn't happen");
+            System.out.println(
+                errorColorCode + Thread.currentThread().getStackTrace()[2].getMethodName() + ":"
+                    + Thread.currentThread().getStackTrace()[2].getLineNumber() + " - " + element
+                    + ": no such element, sendkeys operation didn't happen");
         }
     }
 }
