@@ -34,7 +34,6 @@ public class WebBaseClass {
 
     static {
         try {
-            System.out.println(System.getProperty("user.dir") + "/web/web.environment.properties");
             input =
                 new FileInputStream(System.getProperty("user.dir") + "/web.environment.properties");
         } catch (FileNotFoundException e) {
