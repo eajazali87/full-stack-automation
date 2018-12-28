@@ -117,3 +117,7 @@ public class WebBaseClass {
         driver.quit();
     }
 }
+
+// -> Add some exception handling cases for incorrect values in the properties files
+// -> Hook it up with Travis CI and Jenkins
+// -> Add few more unit tests
