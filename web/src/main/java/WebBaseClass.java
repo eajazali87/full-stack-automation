@@ -55,25 +55,15 @@ public class WebBaseClass {
             treeMap.put(key, value);
         }
         System.out.println(treeMap);
-        String[] capabilities = new String[treeMap.size()];
 
-        for (int i = 0; i < treeMap.size(); i++) {
-            capabilities[i] = treeMap.values().toArray()[i].toString();
-            System.out.println(capabilities[i]);
+        String runEnv = "", browser = "";
+        if (treeMap.containsKey("runEnv")) {
+            runEnv = treeMap.get("runEnv");
         }
 
-        webCap = new WebCap.WebCapBuilder().
-            setBrowser(capabilities[0]).
-            setOs(capabilities[1]).
-            setRunEnv(capabilities[2]).
-            setRunEnv(capabilities[3]).
-            setApiKey(capabilities[4]).
-            setUserName(capabilities[5]).
-            setVersion(capabilities[6]).
-            build();
-
-        String runEnv = capabilities[2];
-        String browser = capabilities[0];
+        if (treeMap.containsKey("browserName")) {
+            browser = treeMap.get("browserName");
+        }
 
         setUpDriver = new SetUpDriver();
 
@@ -128,7 +118,3 @@ public class WebBaseClass {
         driver.quit();
     }
 }
-
-//Add all common methods
-//Introduce local vs sauce set up -> connect to sauce as well
-// More robustness for capabilities array
