@@ -7,7 +7,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -30,6 +30,7 @@ public class WebBaseClass {
     TreeMap<String, String> treeMap = null;
     static String runEnv = "";
     static String ci_mode = "";
+    static String machine = "";
     final static String USERNAME = "p_PDAauto";
     final static String ACCESS_KEY = "b9d2b44a-7151-43f8-9f4e-d2ae58426773";
     final String URL =
@@ -71,12 +72,7 @@ public class WebBaseClass {
 
         System.out.println("run env from jenkins: " + runEnv);
 
-        if (runEnv.equals("local") && ci_mode.equals("on")) {
-            runEnv = System.getProperty("runEnv");
-            ci_mode = System.getProperty("ci_mode");
-            driver = new HtmlUnitDriver();
-
-        } else if (runEnv.equals("local")) {
+        if ((machine.equals("umahaea")) && (runEnv.equals("local"))) {
             if (browser.equals("chrome")) {
                 setUpDriver.chromeDriver();
                 driver = new ChromeDriver();
@@ -94,7 +90,8 @@ public class WebBaseClass {
                     "check the browser name, make sure it is one of these: chrome, firefox, safari, ie, edge");
                 System.exit(1);
             }
-        } else if (runEnv.equals("cloud")) {
+        } else if (((machine.equals("jenkins")) && (runEnv.equals("cloud")))
+            || (machine.equals("umahaea")) && (runEnv.equals("cloud"))) {
             if (browser.equals("chrome")) {
                 desiredCapabilities = DesiredCapabilities.chrome();
                 setDesiredCapabilities();
@@ -112,6 +109,8 @@ public class WebBaseClass {
                 setDesiredCapabilities();
             }
             driver = new RemoteWebDriver(new URL(URL), desiredCapabilities);
+        } else if ((machine.equals("jenkins")) && (runEnv.equals("local"))) {
+            driver = new HtmlUnitDriver();
         }
         automate = new AutomateHelpers(driver);
     }
@@ -125,6 +124,11 @@ public class WebBaseClass {
     @AfterClass(alwaysRun = true) public void tearDown() {
         driver.close();
         driver.quit();
+    }
+
+    @BeforeSuite(alwaysRun = true) public void beforeSuite() {
+        machine = String.valueOf(System.getenv().get("USER"));
+        System.out.println("machine machine machine: "+machine);
     }
 }
 
