@@ -44,7 +44,8 @@ public class WebBaseClass {
         }
     }
 
-    @BeforeClass(alwaysRun = true) public void setUp() throws IOException {
+    @BeforeClass(alwaysRun = true)
+    public void setUp() throws IOException {
         desiredCapabilities = new DesiredCapabilities();
         setUpDriver = new SetUpDriver();
         System.out.println("run env: " + runEnv);
@@ -67,8 +68,9 @@ public class WebBaseClass {
                     "check the browser name, make sure it is one of these: chrome, firefox, safari, ie, edge");
                 System.exit(1);
             }
-        } else if (((machine.equals("jenkins")) && (runEnv.equals("cloud")))
-            || (machine.equals("umahaea")) && (runEnv.equals("cloud"))) {
+        } else if ((machine.equals("jenkins")) && (runEnv.equals("local"))) {
+            driver = new HtmlUnitDriver();
+        } else if (runEnv.equals("cloud")) {
             if (browser.equals("chrome")) {
                 desiredCapabilities = DesiredCapabilities.chrome();
                 setDesiredCapabilities();
@@ -86,8 +88,6 @@ public class WebBaseClass {
                 setDesiredCapabilities();
             }
             driver = new RemoteWebDriver(new URL(URL), desiredCapabilities);
-        } else if ((machine.equals("jenkins")) && (runEnv.equals("local"))) {
-            driver = new HtmlUnitDriver();
         }
         automate = new AutomateHelpers(driver);
     }
@@ -131,7 +131,7 @@ public class WebBaseClass {
 
         if ((machine.equals("umahaea"))) {
             runEnv = treeMap.get("runEnv");
-        } else if(machine.equals("jenkins")) {
+        } else if (machine.equals("jenkins")) {
             runEnv = System.getProperty("runEnv");
         }
 
