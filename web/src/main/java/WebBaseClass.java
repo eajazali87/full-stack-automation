@@ -134,15 +134,15 @@ public class WebBaseClass {
         } else if (machine.equals("jenkins")) {
             runEnv = System.getProperty("runEnv");
         }
-
     }
 }
 
-// -> Hook it up with Travis CI and Jenkins
-// -> Sauce connect set up
+// -> Sauce connect set up -> Done
+// -> Hook it up with Jenkins
 // -> report integration
 // -> emailable report
 // -> send screen shot on failure
 // -> Start work on moving common code to shared services
 // -> Add some exception handling cases for incorrect values in the properties files
 // -> Add few more unit tests
+// -> Hook it up with Travis CI
