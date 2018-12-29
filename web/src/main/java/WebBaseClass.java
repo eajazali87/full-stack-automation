@@ -23,14 +23,13 @@ public class WebBaseClass {
     public WebDriver driver = null;
     static InputStream input;
     static Properties prop = new Properties();
-    static WebCap webCap = null;
     SetUpDriver setUpDriver = null;
     AutomateHelpers automate = null;
     DesiredCapabilities desiredCapabilities = null;
     TreeMap<String, String> treeMap = null;
     static String runEnv = "";
-    static String ci_mode = "";
     static String machine = "";
+    static String browser = "";
     final static String USERNAME = "p_PDAauto";
     final static String ACCESS_KEY = "b9d2b44a-7151-43f8-9f4e-d2ae58426773";
     final String URL =
@@ -48,28 +47,7 @@ public class WebBaseClass {
     @BeforeClass(alwaysRun = true) public void setUp() throws IOException {
         prop.load(input);
         desiredCapabilities = new DesiredCapabilities();
-        Enumeration propertyName = prop.keys();
-        treeMap = new TreeMap<String, String>();
-
-        while (propertyName.hasMoreElements()) {
-            String key = (String) propertyName.nextElement();
-            String value = (String) prop.get(key);
-            System.out.println(key + ": " + value);
-            treeMap.put(key, value);
-        }
-        System.out.println(treeMap);
-
-        String browser = "";
-        if (treeMap.containsKey("runEnv")) {
-            runEnv = treeMap.get("runEnv");
-        }
-
-        if (treeMap.containsKey("browserName")) {
-            browser = treeMap.get("browserName");
-        }
-
         setUpDriver = new SetUpDriver();
-
         System.out.println("run env from jenkins: " + runEnv);
 
         if ((machine.equals("umahaea")) && (runEnv.equals("local"))) {
@@ -121,14 +99,42 @@ public class WebBaseClass {
         }
     }
 
-    @AfterClass(alwaysRun = true) public void tearDown() {
+    @AfterClass(alwaysRun = true)
+    public void tearDown() {
         driver.close();
         driver.quit();
     }
 
-    @BeforeSuite(alwaysRun = true) public void beforeSuite() {
+    @BeforeSuite(alwaysRun = true)
+    public void beforeSuite() {
         machine = String.valueOf(System.getenv().get("USER"));
-        System.out.println("machine machine machine: "+machine);
+        System.out.println("machine machine machine: " + machine);
+        Enumeration propertyName = prop.keys();
+        treeMap = new TreeMap<String, String>();
+
+        while (propertyName.hasMoreElements()) {
+            String key = (String) propertyName.nextElement();
+            String value = (String) prop.get(key);
+            System.out.println(key + ": " + value);
+            treeMap.put(key, value);
+        }
+
+        System.out.println(treeMap);
+
+        if (treeMap.containsKey("browserName")) {
+            browser = treeMap.get("browserName");
+        } else {
+            System.out.println(
+                "mention a 'browserName' property to run the tests, else refer this sample environment.properties file");
+            System.exit(1);
+        }
+
+        if ((machine.equals("umahaea"))) {
+            runEnv = treeMap.get("runEnv");
+        } else if(machine.equals("jenkins")) {
+            runEnv = System.getProperty("runEnv");
+        }
+
     }
 }
 
