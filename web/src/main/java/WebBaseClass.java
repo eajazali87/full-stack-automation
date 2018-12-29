@@ -1,6 +1,7 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
@@ -27,6 +28,8 @@ public class WebBaseClass {
     AutomateHelpers automate = null;
     DesiredCapabilities desiredCapabilities = null;
     TreeMap<String, String> treeMap = null;
+    static String runEnv = System.getProperty("runEnv");
+    static String CI_MODE = System.getProperty("CI");
     final static String USERNAME = "p_PDAauto";
     final static String ACCESS_KEY = "b9d2b44a-7151-43f8-9f4e-d2ae58426773";
     final String URL =
@@ -42,7 +45,6 @@ public class WebBaseClass {
     }
 
     @BeforeClass(alwaysRun = true) public void setUp() throws IOException {
-        String runEnv = System.getProperty("runEnv");
         prop.load(input);
         desiredCapabilities = new DesiredCapabilities();
         Enumeration propertyName = prop.keys();
@@ -67,9 +69,12 @@ public class WebBaseClass {
 
         setUpDriver = new SetUpDriver();
 
-        System.out.println("run env from jenkins: "+runEnv);
+        System.out.println("run env from jenkins: " + runEnv);
 
-        if (runEnv.equals("local")) {
+        if (runEnv.equals("local") && CI_MODE.equals("on")) {
+            driver = new HtmlUnitDriver();
+
+        } else if (runEnv.equals("local")) {
             if (browser.equals("chrome")) {
                 setUpDriver.chromeDriver();
                 driver = new ChromeDriver();
