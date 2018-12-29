@@ -121,7 +121,10 @@ public class WebBaseClass {
     }
 }
 
-// -> Add some exception handling cases for incorrect values in the properties files
 // -> Hook it up with Travis CI and Jenkins
-// -> Add few more unit tests
+// -> Set up a run time environment in jenkins (for eg chrome)
+// -> Sauce connect set up
+// -> report integration
 // -> Start work on moving common code to shared services
+// -> Add some exception handling cases for incorrect values in the properties files
+// -> Add few more unit tests
