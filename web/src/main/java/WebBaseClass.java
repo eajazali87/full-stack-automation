@@ -45,10 +45,9 @@ public class WebBaseClass {
     }
 
     @BeforeClass(alwaysRun = true) public void setUp() throws IOException {
-        prop.load(input);
         desiredCapabilities = new DesiredCapabilities();
         setUpDriver = new SetUpDriver();
-        System.out.println("run env from jenkins: " + runEnv);
+        System.out.println("run env: " + runEnv);
 
         if ((machine.equals("umahaea")) && (runEnv.equals("local"))) {
             if (browser.equals("chrome")) {
@@ -106,9 +105,10 @@ public class WebBaseClass {
     }
 
     @BeforeSuite(alwaysRun = true)
-    public void beforeSuite() {
+    public void beforeSuite() throws IOException {
         machine = String.valueOf(System.getenv().get("USER"));
         System.out.println("machine machine machine: " + machine);
+        prop.load(input);
         Enumeration propertyName = prop.keys();
         treeMap = new TreeMap<String, String>();
 
