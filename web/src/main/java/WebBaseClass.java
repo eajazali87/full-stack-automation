@@ -29,7 +29,7 @@ public class WebBaseClass {
     DesiredCapabilities desiredCapabilities = null;
     TreeMap<String, String> treeMap = null;
     static String runEnv = System.getProperty("runEnv");
-    static String ci_mode = System.getProperty("CI");
+    static String ci_mode = System.getProperty("ci_mode");
     final static String USERNAME = "p_PDAauto";
     final static String ACCESS_KEY = "b9d2b44a-7151-43f8-9f4e-d2ae58426773";
     final String URL =
