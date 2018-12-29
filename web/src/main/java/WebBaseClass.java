@@ -71,7 +71,7 @@ public class WebBaseClass {
 
         System.out.println("run env from jenkins: " + runEnv);
 
-        if (runEnv.equals("local") && CI_MODE.equals("on")) {
+        if (runEnv.equals("local") && ci_mode.equals("on")) {
             driver = new HtmlUnitDriver();
 
         } else if (runEnv.equals("local")) {
