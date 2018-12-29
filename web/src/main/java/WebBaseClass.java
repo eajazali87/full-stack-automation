@@ -28,8 +28,8 @@ public class WebBaseClass {
     AutomateHelpers automate = null;
     DesiredCapabilities desiredCapabilities = null;
     TreeMap<String, String> treeMap = null;
-    static String runEnv = System.getProperty("runEnv");
-    static String ci_mode = System.getProperty("ci_mode");
+    static String runEnv = "";
+    static String ci_mode = "";
     final static String USERNAME = "p_PDAauto";
     final static String ACCESS_KEY = "b9d2b44a-7151-43f8-9f4e-d2ae58426773";
     final String URL =
@@ -60,7 +60,7 @@ public class WebBaseClass {
 
         String browser = "";
         if (treeMap.containsKey("runEnv")) {
-            //runEnv = treeMap.get("runEnv");
+            runEnv = treeMap.get("runEnv");
         }
 
         if (treeMap.containsKey("browserName")) {
@@ -72,6 +72,8 @@ public class WebBaseClass {
         System.out.println("run env from jenkins: " + runEnv);
 
         if (runEnv.equals("local") && ci_mode.equals("on")) {
+            runEnv = System.getProperty("runEnv");
+            ci_mode = System.getProperty("ci_mode");
             driver = new HtmlUnitDriver();
 
         } else if (runEnv.equals("local")) {
