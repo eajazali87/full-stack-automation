@@ -42,6 +42,7 @@ public class WebBaseClass {
     }
 
     @BeforeClass(alwaysRun = true) public void setUp() throws IOException {
+        String runEnv = System.getProperty("runEnv");
         prop.load(input);
         desiredCapabilities = new DesiredCapabilities();
         Enumeration propertyName = prop.keys();
@@ -55,9 +56,9 @@ public class WebBaseClass {
         }
         System.out.println(treeMap);
 
-        String runEnv = "", browser = "";
+        String browser = "";
         if (treeMap.containsKey("runEnv")) {
-            runEnv = treeMap.get("runEnv");
+            //runEnv = treeMap.get("runEnv");
         }
 
         if (treeMap.containsKey("browserName")) {
@@ -65,6 +66,8 @@ public class WebBaseClass {
         }
 
         setUpDriver = new SetUpDriver();
+
+        System.out.println("run env from jenkins: "+runEnv);
 
         if (runEnv.equals("local")) {
             if (browser.equals("chrome")) {
