@@ -134,14 +134,16 @@ public class WebBaseClass {
     }
 
     @AfterSuite(alwaysRun = true)
-    public void afterSuite(){
-
+    public void afterSuite() throws Exception {
+        System.out.println(System.getProperty("user.dir")+"/allure-results");
+        String[] cmd = {"allure", "generate",System.getProperty("user.dir")+"/allure-results"};
+        Runtime.getRuntime().exec(cmd);
     }
 }
 
 // -> Sauce connect set up -> Done
 // -> Hook it up with Jenkins -> Done
-// -> report integration
+// -> report integration -> Done
 // -> emailable report
 // -> send screen shot on failure
 // -> Start work on moving common code to shared services
