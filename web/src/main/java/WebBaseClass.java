@@ -4,10 +4,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -135,10 +132,15 @@ public class WebBaseClass {
             runEnv = System.getProperty("runEnv");
         }
     }
+
+    @AfterSuite(alwaysRun = true)
+    public void afterSuite(){
+
+    }
 }
 
 // -> Sauce connect set up -> Done
-// -> Hook it up with Jenkins
+// -> Hook it up with Jenkins -> Done
 // -> report integration
 // -> emailable report
 // -> send screen shot on failure
