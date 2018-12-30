@@ -1,3 +1,5 @@
+import org.apache.commons.io.FileUtils;
+import org.eclipse.jetty.server.Response;
 import org.openqa.selenium.*;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.interactions.Actions;
@@ -5,10 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Arrays;
 
 public class AutomateHelpers {
@@ -430,6 +429,17 @@ public class AutomateHelpers {
                     + Thread.currentThread().getStackTrace()[2].getLineNumber() + " - " + element
                     + ": no such element, unable to get all attributes of the element");
             return null;
+        }
+    }
+
+    public void takeScreenShotOnFailure() {
+        File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(srcFile, new File(
+                "/Users/umahaea/Documents/workspace/full-stack-automation/web/TestFailureScreenShots"));
+        } catch (IOException e) {
+            e.printStackTrace();
+
         }
     }
 }

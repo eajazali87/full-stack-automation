@@ -1,10 +1,11 @@
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 
 
+@Listeners(CustomListener.class)
 public class HelloWorld extends WebBaseClass {
 
     @Test public void test1() {
@@ -21,5 +22,9 @@ public class HelloWorld extends WebBaseClass {
         automate.getUrl("https://www.pearson.com/us/");
         System.out.println("3: "+automate.isElementDisplayed(By.xpath("//*[@id=\"top\"]/footer/div/div/section[2]/div/div/div[3]/div/ul/li[2]/a")));
         automate.click(By.xpath("//*[@id=\"top\"]/footer/div/div/section[2]/div/div/div[3]/div/ul/li[2]/a"));
+    }
+
+    @Test public void test3() {
+        Assert.assertEquals(false,true);
     }
 }
