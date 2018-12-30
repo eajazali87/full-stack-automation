@@ -146,7 +146,12 @@ public class WebBaseClass {
 // -> report integration -> Done
 // -> emailable report
 // -> send screen shot on failure
+
+
 // -> Start work on moving common code to shared services
+
 // -> Add some exception handling cases for incorrect values in the properties files
+
 // -> Add few more unit tests
+
 // -> Hook it up with Travis CI
