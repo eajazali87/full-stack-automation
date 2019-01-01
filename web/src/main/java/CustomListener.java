@@ -29,13 +29,13 @@ public class CustomListener extends WebBaseClass implements ITestListener, IInvo
         Object currentClass = iTestResult.getInstance();
         WebDriver webDriver = ((WebBaseClass) currentClass).driver;
         if (webDriver != null) {
-
+            System.out.println("11");
             try {
                 File srcFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
                 FileUtils.copyFile(srcFile, new File(
                     System.getProperty("user.dir") + "/TestFailureScreenShots/" + methodName
                         + ".jpg"));
-
+                System.out.println("22");
             } catch (ScreenshotException e) {
                 System.out.println("unable to take screen shot" + e.getMessage());
             } catch (IOException e) {
