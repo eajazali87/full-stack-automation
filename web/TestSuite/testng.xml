@@ -1,6 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
+
 <suite name="Web Automation">
+    <listeners>
+        <listener class-name="CustomListener"></listener>
+    </listeners>
 
     <test name="Web Automation">
         <classes>
