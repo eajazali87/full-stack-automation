@@ -27,8 +27,8 @@ public class WebBaseClass {
     static String runEnv = "";
     static String machine = "";
     static String browser = "";
-    final static String USERNAME = "p_PDAauto";
-    final static String ACCESS_KEY = "b9d2b44a-7151-43f8-9f4e-d2ae58426773";
+    final static String USERNAME = System.getenv("USERNAME");
+    final static String ACCESS_KEY = System.getenv("ACCESS_KEY");
     final String URL =
         "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
     static {
