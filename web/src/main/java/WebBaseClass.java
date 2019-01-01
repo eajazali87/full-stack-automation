@@ -128,15 +128,15 @@ public class WebBaseClass {
         if ((machine.equals("umahaea"))) {
             runEnv = treeMap.get("runEnv");
         } else if (machine.equals("travis")) {
-            runEnv = System.getProperty("runEnv");
+            runEnv = System.getenv("runEnv");
         }
     }
 
     @AfterSuite(alwaysRun = true)
     public void afterSuite() throws Exception {
-        System.out.println(System.getProperty("user.dir") + "/allure-results");
-        String[] cmd = {"allure", "generate", System.getProperty("user.dir") + "/allure-results"};
-        Runtime.getRuntime().exec(cmd);
+//        System.out.println(System.getProperty("user.dir") + "/allure-results");
+//        String[] cmd = {"allure", "generate", System.getProperty("user.dir") + "/allure-results"};
+//        Runtime.getRuntime().exec(cmd);
     }
 }
 
