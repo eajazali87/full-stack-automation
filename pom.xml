@@ -14,6 +14,7 @@
     </modules>
     <properties>
         <aspectj.version>1.9.2</aspectj.version>
+        <web.module>${basedir}/web/</web.module>
     </properties>
 
     <dependencies>
