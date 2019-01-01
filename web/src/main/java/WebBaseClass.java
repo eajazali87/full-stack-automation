@@ -31,7 +31,6 @@ public class WebBaseClass {
     final static String ACCESS_KEY = "b9d2b44a-7151-43f8-9f4e-d2ae58426773";
     final String URL =
         "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
-
     static {
         try {
             input =
