@@ -5,6 +5,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 
 import java.awt.*;
 import java.io.*;
@@ -42,6 +43,7 @@ public class AutomateHelpers {
                 errorColorCode + Thread.currentThread().getStackTrace()[2].getMethodName() + ":"
                     + Thread.currentThread().getStackTrace()[2].getLineNumber() + " - " + element
                     + ": no such element, click operation didn't happen");
+            throw new RuntimeException("no such element, click operation didn't happen");
         }
     }
 
@@ -70,6 +72,7 @@ public class AutomateHelpers {
                 errorColorCode + Thread.currentThread().getStackTrace()[2].getMethodName() + ":"
                     + Thread.currentThread().getStackTrace()[2].getLineNumber() + " - " + element
                     + ": no such element, sendkeys operation didn't happen");
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -110,7 +113,8 @@ public class AutomateHelpers {
                 errorColorCode + Thread.currentThread().getStackTrace()[2].getMethodName() + ":"
                     + Thread.currentThread().getStackTrace()[2].getLineNumber() + " - " + element
                     + ": element is not present");
-            return false;
+            throw new RuntimeException();
+            //return false;
         }
     }
 
@@ -429,17 +433,6 @@ public class AutomateHelpers {
                     + Thread.currentThread().getStackTrace()[2].getLineNumber() + " - " + element
                     + ": no such element, unable to get all attributes of the element");
             return null;
-        }
-    }
-
-    public void takeScreenShotOnFailure() {
-        File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(srcFile, new File(
-                "/Users/umahaea/Documents/workspace/full-stack-automation/web/TestFailureScreenShots"));
-        } catch (IOException e) {
-            e.printStackTrace();
-
         }
     }
 }

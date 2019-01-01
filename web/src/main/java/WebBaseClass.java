@@ -88,7 +88,6 @@ public class WebBaseClass {
             driver = new RemoteWebDriver(new URL(URL), desiredCapabilities);
         }
         automate = new AutomateHelpers(driver);
-        customListener = new CustomListener();
     }
 
     public void setDesiredCapabilities() {
@@ -143,10 +142,6 @@ public class WebBaseClass {
         //SendFileEmail.sendEmail();
     }
 
-    @AfterMethod
-    public void afterMethod(){
-
-    }
 }
 
 
