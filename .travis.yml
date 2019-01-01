@@ -22,4 +22,4 @@ install:
 - mvn clean install -DskipTests=true -q -Dmaven.javadoc.skip=true -B -V
 
 script:
-- mvn -Dtest_suite_xml=TestSuite/testng.xml test
+- mvn -Dtest_suite_xml=web/TestSuite/testng.xml test
