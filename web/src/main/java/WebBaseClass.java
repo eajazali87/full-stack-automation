@@ -5,7 +5,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.*;
-import ru.yandex.qatools.allure.CommandLine;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -23,7 +22,6 @@ public class WebBaseClass {
     static Properties prop = new Properties();
     SetUpDriver setUpDriver = null;
     AutomateHelpers automate = null;
-    CustomListener customListener= null;
     DesiredCapabilities desiredCapabilities = null;
     TreeMap<String, String> treeMap = null;
     static String runEnv = "";
@@ -43,7 +41,8 @@ public class WebBaseClass {
         }
     }
 
-    @BeforeClass(alwaysRun = true) public void setUp() throws IOException {
+    @BeforeClass(alwaysRun = true)
+    public void setUp() throws IOException {
         desiredCapabilities = new DesiredCapabilities();
         setUpDriver = new SetUpDriver();
         System.out.println("run env: " + runEnv);
@@ -96,12 +95,14 @@ public class WebBaseClass {
         }
     }
 
-    @AfterClass(alwaysRun = true) public void tearDown() {
+    @AfterClass(alwaysRun = true)
+    public void tearDown() {
         driver.close();
         driver.quit();
     }
 
-    @BeforeSuite(alwaysRun = true) public void beforeSuite() throws IOException {
+    @BeforeSuite(alwaysRun = true)
+    public void beforeSuite() throws IOException {
         machine = String.valueOf(System.getenv().get("USER"));
         System.out.println("machine machine machine: " + machine);
         prop.load(input);
@@ -132,21 +133,13 @@ public class WebBaseClass {
         }
     }
 
-    @AfterSuite(alwaysRun = true) public void afterSuite() throws Exception {
-        //        CommandLine.main(
-        //            new String[] {"allure generate " + System.getProperty("user.dir") + "/allure-results"});
+    @AfterSuite(alwaysRun = false)
+    public void afterSuite() throws Exception {
         System.out.println(System.getProperty("user.dir") + "/allure-results");
         String[] cmd = {"allure", "generate", System.getProperty("user.dir") + "/allure-results"};
         Runtime.getRuntime().exec(cmd);
-
-        //SendFileEmail.sendEmail();
     }
-
 }
-
-
-
-
 
 
 // -> Sauce connect set up -> Done
