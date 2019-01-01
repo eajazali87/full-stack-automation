@@ -145,14 +145,9 @@ public class WebBaseClass {
 // -> Hook it up with Jenkins -> Done
 // -> report integration -> In Progress
 // -> take screen shot on failure -> Done
-// -> emailable report
+// -> emailable report -> In Progress
 
 // -> Add some exception handling cases for incorrect values in the properties files
-
-
 // -> Hook it up with Travis CI
-
-
 // -> Start work on moving common code to shared services
 // -> Add few more unit tests
-
