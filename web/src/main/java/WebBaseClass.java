@@ -64,7 +64,7 @@ public class WebBaseClass {
                     "check the browser name, make sure it is one of these: chrome, firefox, safari, ie, edge");
                 System.exit(1);
             }
-        } else if ((machine.equals("jenkins")) && (runEnv.equals("local"))) {
+        } else if ((machine.equals("travis")) && (runEnv.equals("local"))) {
             driver = new HtmlUnitDriver();
         } else if (runEnv.equals("cloud")) {
             if (browser.equals("chrome")) {
@@ -127,7 +127,7 @@ public class WebBaseClass {
 
         if ((machine.equals("umahaea"))) {
             runEnv = treeMap.get("runEnv");
-        } else if (machine.equals("jenkins")) {
+        } else if (machine.equals("travis")) {
             runEnv = System.getProperty("runEnv");
         }
     }
