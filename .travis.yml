@@ -1,5 +1,5 @@
 language: java
-sudo: required
+sudo: false
 
 jdk:
 - oraclejdk8
@@ -12,14 +12,9 @@ env:
 addons:
   sauce_connect:
     no_ssl_bump_domains: all
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - g++-4.8
 
 install:
 - mvn clean install -DskipTests=true -q -Dmaven.javadoc.skip=true -B -V
 
 script:
-- mvn -Dtest_suite_xml=web/TestSuite/testng.xml test
+- mvn -Dtest_suite_xml=testng.xml test

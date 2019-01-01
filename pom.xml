@@ -81,7 +81,7 @@
                 <version>3.0.0-M3</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>${project.basedir}/TestSuite/${suiteXmlFile}</suiteXmlFile>
+                        <suiteXmlFile>${basedir}/web/TestSuite/${test_suite_xml}</suiteXmlFile>
                     </suiteXmlFiles>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
