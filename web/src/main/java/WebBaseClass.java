@@ -143,9 +143,9 @@ public class WebBaseClass {
 
 // -> Sauce connect set up -> Done
 // -> Hook it up with Jenkins -> Done
-// -> report integration -> In Progress
 // -> take screen shot on failure -> Done
 // -> emailable report -> In Progress
+// -> report integration -> In Progress
 
 // -> Add some exception handling cases for incorrect values in the properties files
 // -> Hook it up with Travis CI
