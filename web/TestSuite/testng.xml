@@ -1,6 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="Web Automation">
+
     <test name="Web Automation">
         <classes>
             <class name="HelloWorld"/>
