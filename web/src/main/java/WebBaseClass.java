@@ -133,27 +133,26 @@ public class WebBaseClass {
         }
     }
 
-    @AfterSuite(alwaysRun = false)
+    @AfterSuite(alwaysRun = true)
     public void afterSuite() throws Exception {
-//        System.out.println(System.getProperty("user.dir") + "/allure-results");
-//        String[] cmd = {"allure", "generate", System.getProperty("user.dir") + "/allure-results"};
-//        Runtime.getRuntime().exec(cmd);
+        System.out.println(System.getProperty("user.dir") + "/allure-results");
+        String[] cmd = {"allure", "generate", System.getProperty("user.dir") + "/allure-results"};
+        Runtime.getRuntime().exec(cmd);
     }
 }
 
-
 // -> Sauce connect set up -> Done
 // -> Hook it up with Jenkins -> Done
-// -> report integration -> Done
-// -> take screen shot on failure
-
-
-// -> Start work on moving common code to shared services
+// -> report integration -> In Progress
+// -> take screen shot on failure -> Done
+// -> emailable report
 
 // -> Add some exception handling cases for incorrect values in the properties files
 
-// -> Add few more unit tests
 
 // -> Hook it up with Travis CI
 
-// -> emailable report
+
+// -> Start work on moving common code to shared services
+// -> Add few more unit tests
+
