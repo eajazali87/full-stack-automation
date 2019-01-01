@@ -14,7 +14,7 @@
     </modules>
     <properties>
         <aspectj.version>1.9.2</aspectj.version>
-        <web.module>${basedir}/web/</web.module>
+        <web.module>${project.basedir}/web/</web.module>
     </properties>
 
     <dependencies>
@@ -81,7 +81,7 @@
                 <version>3.0.0-M3</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>/TestSuite/${suiteXmlFile}</suiteXmlFile>
+                        <suiteXmlFile>${project.basedir}/TestSuite/${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
