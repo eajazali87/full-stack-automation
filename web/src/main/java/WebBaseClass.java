@@ -135,9 +135,9 @@ public class WebBaseClass {
 
     @AfterSuite(alwaysRun = false)
     public void afterSuite() throws Exception {
-        System.out.println(System.getProperty("user.dir") + "/allure-results");
-        String[] cmd = {"allure", "generate", System.getProperty("user.dir") + "/allure-results"};
-        Runtime.getRuntime().exec(cmd);
+//        System.out.println(System.getProperty("user.dir") + "/allure-results");
+//        String[] cmd = {"allure", "generate", System.getProperty("user.dir") + "/allure-results"};
+//        Runtime.getRuntime().exec(cmd);
     }
 }
 
