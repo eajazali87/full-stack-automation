@@ -14,7 +14,7 @@
     </modules>
     <properties>
         <aspectj.version>1.9.2</aspectj.version>
-        <web.module>${project.basedir}/web/</web.module>
+        <web.module>${project.basedir}</web.module>
     </properties>
 
     <dependencies>
