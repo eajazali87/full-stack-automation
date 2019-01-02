@@ -129,6 +129,10 @@ public class WebBaseClass {
             runEnv = treeMap.get("runEnv");
         } else if (machine.equals("travis")) {
             runEnv = System.getenv("runEnv");
+            System.out.println(runEnv);
+            System.out.println(runEnv);
+            System.out.println(runEnv);
+            System.out.println(runEnv);
         }
     }
 
@@ -143,10 +147,11 @@ public class WebBaseClass {
 // -> Sauce connect set up -> Done
 // -> Hook it up with Jenkins -> Done
 // -> take screen shot on failure -> Done
+// -> Hook it up with Travis CI -> In Progress
 // -> emailable report -> In Progress
 // -> report integration -> In Progress
 
 // -> Add some exception handling cases for incorrect values in the properties files
-// -> Hook it up with Travis CI
+
 // -> Start work on moving common code to shared services
 // -> Add few more unit tests
