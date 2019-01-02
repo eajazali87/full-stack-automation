@@ -31,6 +31,7 @@ public class WebBaseClass {
     final static String ACCESS_KEY = System.getenv("ACCESS_KEY");
     final String URL =
         "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+
     static {
         try {
             input =
@@ -40,8 +41,7 @@ public class WebBaseClass {
         }
     }
 
-    @BeforeClass(alwaysRun = true)
-    public void setUp() throws IOException {
+    @BeforeClass(alwaysRun = true) public void setUp() throws IOException {
         desiredCapabilities = new DesiredCapabilities();
         setUpDriver = new SetUpDriver();
         System.out.println("run env: " + runEnv);
@@ -66,7 +66,8 @@ public class WebBaseClass {
             }
         } else if ((ciTool.equals("jenkins")) && (runEnv.equals("local"))) {
             driver = new HtmlUnitDriver();
-        } else if (ciTool.equals("travis") || runEnv.equals("cloud")) {
+        } else if (((ciTool.equals("travis")) || ciTool.equals("jenkins")) || runEnv
+            .equals("cloud")) {
             if (browser.equals("chrome")) {
                 desiredCapabilities = DesiredCapabilities.chrome();
                 setDesiredCapabilities();
@@ -94,14 +95,12 @@ public class WebBaseClass {
         }
     }
 
-    @AfterClass(alwaysRun = true)
-    public void tearDown() {
+    @AfterClass(alwaysRun = true) public void tearDown() {
         driver.close();
         driver.quit();
     }
 
-    @BeforeSuite(alwaysRun = true)
-    public void beforeSuite() throws IOException {
+    @BeforeSuite(alwaysRun = true) public void beforeSuite() throws IOException {
         ciTool = String.valueOf(System.getenv().get("USER"));
         System.out.println("ciTool: " + ciTool);
         prop.load(input);
@@ -128,15 +127,17 @@ public class WebBaseClass {
         if ((ciTool.equals("umahaea"))) {
             runEnv = treeMap.get("runEnv");
         } else if (ciTool.equals("travis")) {
+            runEnv = "cloud";
+        } else if (ciTool.equals("jenkins")) {
             runEnv = System.getenv("runEnv");
         }
     }
 
     @AfterSuite(alwaysRun = true)
     public void afterSuite() throws Exception {
-//        System.out.println(System.getProperty("user.dir") + "/allure-results");
-//        String[] cmd = {"allure", "generate", System.getProperty("user.dir") + "/allure-results"};
-//        Runtime.getRuntime().exec(cmd);
+        //        System.out.println(System.getProperty("user.dir") + "/allure-results");
+        //        String[] cmd = {"allure", "generate", System.getProperty("user.dir") + "/allure-results"};
+        //        Runtime.getRuntime().exec(cmd);
     }
 }
 
