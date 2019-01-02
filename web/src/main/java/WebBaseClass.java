@@ -103,7 +103,7 @@ public class WebBaseClass {
     @BeforeSuite(alwaysRun = true)
     public void beforeSuite() throws IOException {
         ciTool = String.valueOf(System.getenv().get("USER"));
-        System.out.println("ciTool ciTool ciTool: " + ciTool);
+        System.out.println("ciTool: " + ciTool);
         prop.load(input);
         Enumeration propertyName = prop.keys();
         treeMap = new TreeMap<String, String>();
@@ -117,11 +117,11 @@ public class WebBaseClass {
 
         System.out.println(treeMap);
 
-        if (treeMap.containsKey("browserName")) {
+        if (treeMap.containsKey("browserName") && treeMap.containsKey("runEnv")) {
             browser = treeMap.get("browserName");
         } else {
             System.out.println(
-                "mention a 'browserName' property to run the tests, else refer this sample environment.properties file");
+                "mention a 'browserName', 'runEnv' property to run the tests, else refer this sample environment.properties file");
             System.exit(1);
         }
 
