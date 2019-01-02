@@ -19,3 +19,6 @@ install:
 
 script:
 - mvn -Dtest_suite_xml=testng.xml test
+
+after_script:
+- ls -ltr /home/travis/build/eajazali87/full-stack-automation/web/
