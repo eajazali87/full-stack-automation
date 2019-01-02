@@ -25,7 +25,7 @@ public class WebBaseClass {
     DesiredCapabilities desiredCapabilities = null;
     TreeMap<String, String> treeMap = null;
     static String runEnv = "";
-    static String machine = "";
+    static String ciTool = "";
     static String browser = "";
     final static String USERNAME = System.getenv("USERNAME");
     final static String ACCESS_KEY = System.getenv("ACCESS_KEY");
@@ -46,7 +46,7 @@ public class WebBaseClass {
         setUpDriver = new SetUpDriver();
         System.out.println("run env: " + runEnv);
 
-        if ((machine.equals("umahaea")) && (runEnv.equals("local"))) {
+        if ((ciTool.equals("umahaea")) && (runEnv.equals("local"))) {
             if (browser.equals("chrome")) {
                 setUpDriver.chromeDriver();
                 driver = new ChromeDriver();
@@ -64,9 +64,9 @@ public class WebBaseClass {
                     "check the browser name, make sure it is one of these: chrome, firefox, safari, ie, edge");
                 System.exit(1);
             }
-        } else if ((machine.equals("travis")) && (runEnv.equals("local"))) {
+        } else if ((ciTool.equals("jenkins")) && (runEnv.equals("local"))) {
             driver = new HtmlUnitDriver();
-        } else if (runEnv.equals("cloud")) {
+        } else if (ciTool.equals("travis") || runEnv.equals("cloud")) {
             if (browser.equals("chrome")) {
                 desiredCapabilities = DesiredCapabilities.chrome();
                 setDesiredCapabilities();
@@ -102,8 +102,8 @@ public class WebBaseClass {
 
     @BeforeSuite(alwaysRun = true)
     public void beforeSuite() throws IOException {
-        machine = String.valueOf(System.getenv().get("USER"));
-        System.out.println("machine machine machine: " + machine);
+        ciTool = String.valueOf(System.getenv().get("USER"));
+        System.out.println("ciTool ciTool ciTool: " + ciTool);
         prop.load(input);
         Enumeration propertyName = prop.keys();
         treeMap = new TreeMap<String, String>();
@@ -125,14 +125,10 @@ public class WebBaseClass {
             System.exit(1);
         }
 
-        if ((machine.equals("umahaea"))) {
+        if ((ciTool.equals("umahaea"))) {
             runEnv = treeMap.get("runEnv");
-        } else if (machine.equals("travis")) {
+        } else if (ciTool.equals("travis")) {
             runEnv = System.getenv("runEnv");
-            System.out.println(runEnv);
-            System.out.println(runEnv);
-            System.out.println(runEnv);
-            System.out.println(runEnv);
         }
     }
 
