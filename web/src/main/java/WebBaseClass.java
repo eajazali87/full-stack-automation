@@ -27,8 +27,10 @@ public class WebBaseClass {
     static String runEnv = "";
     static String ciTool = "";
     static String browser = "";
-    final static String USERNAME = System.getenv("USERNAME");
-    final static String ACCESS_KEY = System.getenv("ACCESS_KEY");
+    final static String USERNAME = "p_PDAauto";
+    final static String ACCESS_KEY = "b9d2b44a-7151-43f8-9f4e-d2ae58426773";
+//    final static String USERNAME = System.getenv("USERNAME");
+//    final static String ACCESS_KEY = System.getenv("ACCESS_KEY");
     final String URL =
         "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
 
@@ -144,11 +146,12 @@ public class WebBaseClass {
 // -> Sauce connect set up -> Done
 // -> Hook it up with Jenkins -> Done
 // -> take screen shot on failure -> Done
-// -> Hook it up with Travis CI -> In Progress
+// -> Hook it up with Travis CI -> Done
+
 // -> emailable report -> In Progress
-// -> report integration -> In Progress
+// -> report integration -> (allure generate is in Progress
+
 
 // -> Add some exception handling cases for incorrect values in the properties files
-
 // -> Start work on moving common code to shared services
 // -> Add few more unit tests
