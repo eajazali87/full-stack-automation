@@ -25,7 +25,7 @@ public class HelloWorld extends WebBaseClass {
     @Test
     public void test3()
     {
-        //automate.sendReportInEmail();
+        automate.sendReportInEmail();
         Assert.assertEquals(true,true);
     }
 }

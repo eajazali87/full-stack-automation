@@ -502,8 +502,7 @@ public class AutomateHelpers {
             // Part two is attachment
             messageBodyPart = new MimeBodyPart();
             String filename = "Reports";
-            //DataSource source = new FileDataSource(new File("/Users/umahaea/Documents/workspace/full-stack-automation/web/allure-report.zip"));
-            DataSource source = new FileDataSource("/Users/umahaea/Documents/workspace/full-stack-automation/web/target/surefire-reports/index.html");
+            DataSource source = new FileDataSource(System.getProperty("user.dir")+"/TestFailureScreenShots/test2.jpg");
 
             messageBodyPart.setDataHandler(new DataHandler(source));
             messageBodyPart.setFileName(filename);
