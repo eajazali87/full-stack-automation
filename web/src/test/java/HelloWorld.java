@@ -21,7 +21,7 @@ public class HelloWorld extends WebBaseClass {
     public void test2() {
         automate.getUrl("https://www.pearson.com/us/");
         automate.sendKeys(By.className("search-box-input"), "");
-        automate.click(By.className("search-box-icn"));
+        automate.click(By.className("search-box-icon"));
     }
 
     @Test
@@ -29,10 +29,5 @@ public class HelloWorld extends WebBaseClass {
         automate.getUrl("https://www.pearson.com/us/");
         automate.click(By.xpath("//*[@id=\"top\"]/footer/div/div/section[2]/div/div/div[3]/div/ul/li[2]/a"));
         automate.isElementPresent(By.xpath("//*[@id=\"main-content\"]/div/section[2]/div/div/div[1]/div/div/figure/a/figcaptin"));
-    }
-
-    @Test
-    public void test4() throws MessagingException {
-        Assert.assertEquals(true,true);
     }
 }
