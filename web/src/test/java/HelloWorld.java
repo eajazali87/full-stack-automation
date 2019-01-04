@@ -28,6 +28,6 @@ public class HelloWorld extends WebBaseClass {
     public void test3() {
         automate.getUrl("https://www.pearson.com/us/");
         automate.click(By.xpath("//*[@id=\"top\"]/footer/div/div/section[2]/div/div/div[3]/div/ul/li[2]/a"));
-        automate.isElementPresent(By.xpath("//*[@id=\"main-content\"]/div/section[2]/div/div/div[1]/div/div/figure/a/figcaptin"));
+        automate.isElementPresent(By.xpath("//*[@id=\"main-content\"]/div/section[2]/div/div/div[1]/div/div/figure/a/figcaption"));
     }
 }
