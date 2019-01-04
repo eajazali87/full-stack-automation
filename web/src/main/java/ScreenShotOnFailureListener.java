@@ -9,10 +9,10 @@ import org.testng.*;
 import java.io.File;
 import java.io.IOException;
 
-public class CustomListener extends WebBaseClass implements ITestListener, IInvokedMethodListener {
+public class ScreenShotOnFailureListener extends WebBaseClass implements ITestListener, IInvokedMethodListener {
     String methodName;
 
-    public CustomListener() {
+    public ScreenShotOnFailureListener() {
     }
 
     @Override

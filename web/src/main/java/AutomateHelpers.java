@@ -15,7 +15,10 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.awt.*;
 import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Properties;
 
 public class AutomateHelpers {
@@ -444,9 +447,15 @@ public class AutomateHelpers {
     }
 
 
-    public void sendReportInEmail() {
+    public void emailListOfScreenShots() {
+
+        Date date = new Date();
+        String strDateFormat = "hh:mm:ss a";
+        DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
+        String formattedDate= dateFormat.format(date);
+
         // Recipient's email ID needs to be mentioned.
-        String to = "eajazali87@gmail.com";
+        String to = "eajazali.mahaboobbasha@pearson.com";
 
         // Sender's email ID needs to be mentioned
         String from = "sdeting.automation@gmail.com";
@@ -458,8 +467,6 @@ public class AutomateHelpers {
         String host = "smtp.gmail.com";
 
         Properties props = new Properties();
-
-
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.host", host);
@@ -477,8 +484,8 @@ public class AutomateHelpers {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-            message.setSubject("Testing Subject");
-            message.setText("PFA");
+            message.setSubject("ScreenShots Of Failed Tests: *"+formattedDate+"*");
+            message.setText("Attached is the ScreenShot of Failed Tests: *"+formattedDate+"*");
 
             MimeBodyPart messageBodyPart = new MimeBodyPart();
 
@@ -489,19 +496,19 @@ public class AutomateHelpers {
                 new File(System.getProperty("user.dir") + "/TestFailureScreenShots");
             File[] listOfScreenShotFiles = screenshotFolder.listFiles();
 
-            System.out.println(screenshotFolder + "/" + listOfScreenShotFiles[0].getName());
-            System.out.println(screenshotFolder + "/" + listOfScreenShotFiles[1].getName());
-            System.out.println(screenshotFolder + "/" + listOfScreenShotFiles[2].getName());
+            if(!(listOfScreenShotFiles.length == 0)){
 
             for (int i = 0; i < listOfScreenShotFiles.length; i++) {
                 addAttachment(multipart,
                     screenshotFolder + "/" + listOfScreenShotFiles[i].getName());
             }
-
             message.setContent(multipart);
-            System.out.println("Sending");
+            System.out.println("Sending... give a min..");
             Transport.send(message);
             System.out.println("Done");
+            }else{
+                System.out.println("There are no screen shots to email");
+            }
 
         } catch (MessagingException e) {
             e.printStackTrace();

@@ -3,7 +3,7 @@
 
 <suite name="Web Automation">
     <listeners>
-        <listener class-name="CustomListener"></listener>
+        <listener class-name="ScreenShotOnFailureListener"></listener>
     </listeners>
 
     <test name="Web Automation">

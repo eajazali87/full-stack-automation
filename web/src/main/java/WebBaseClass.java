@@ -140,6 +140,7 @@ public class WebBaseClass {
         //        System.out.println(System.getProperty("user.dir") + "/allure-results");
         //        String[] cmd = {"allure", "generate", System.getProperty("user.dir") + "/allure-results"};
         //        Runtime.getRuntime().exec(cmd);
+        automate.emailListOfScreenShots();
     }
 }
 

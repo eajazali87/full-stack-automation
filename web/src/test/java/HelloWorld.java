@@ -7,7 +7,7 @@ import javax.mail.MessagingException;
 
 
 
-//@Listeners(CustomListener.class)
+@Listeners(ScreenShotOnFailureListener.class)
 public class HelloWorld extends WebBaseClass {
 
     @Test
@@ -20,13 +20,19 @@ public class HelloWorld extends WebBaseClass {
     @Test
     public void test2() {
         automate.getUrl("https://www.pearson.com/us/");
-        automate.click(By.xpath("//*[@id=\"top\"]/footer/div/div/section[2]/div/div/div[3]/div/ul/li[2]/a"));
-        automate.isElementPresent(By.xpath("//*[@id=\"main-content\"]/div/section[2]/div/div/div[1]/div/div/figure/a/figcaption"));
+        automate.sendKeys(By.className("search-box-input"), "");
+        automate.click(By.className("search-box-icn"));
     }
 
     @Test
-    public void test3() throws MessagingException {
-        automate.sendReportInEmail();
+    public void test3() {
+        automate.getUrl("https://www.pearson.com/us/");
+        automate.click(By.xpath("//*[@id=\"top\"]/footer/div/div/section[2]/div/div/div[3]/div/ul/li[2]/a"));
+        automate.isElementPresent(By.xpath("//*[@id=\"main-content\"]/div/section[2]/div/div/div[1]/div/div/figure/a/figcaptin"));
+    }
+
+    @Test
+    public void test4() throws MessagingException {
         Assert.assertEquals(true,true);
     }
 }
