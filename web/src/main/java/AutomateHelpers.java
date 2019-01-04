@@ -1,4 +1,3 @@
-
 import org.openqa.selenium.*;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.interactions.Actions;
@@ -445,7 +444,7 @@ public class AutomateHelpers {
     }
 
 
-    public void sendReportInEmail(){
+    public void sendReportInEmail() {
         // Recipient's email ID needs to be mentioned.
         String to = "eajazali87@gmail.com";
 
@@ -467,19 +466,17 @@ public class AutomateHelpers {
         props.put("mail.smtp.port", "587");
         props.put("mail.smtp.connectiontimeout", "2000");
 
-        Session session = Session.getInstance(props,
-            new javax.mail.Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(username, password);
-                }
-            });
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
 
         try {
 
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
-            message.setRecipients(Message.RecipientType.TO,
-                InternetAddress.parse(to));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             message.setSubject("Testing Subject");
             message.setText("PFA");
 
@@ -488,31 +485,35 @@ public class AutomateHelpers {
             Multipart multipart = new MimeMultipart();
             messageBodyPart = new MimeBodyPart();
 
+            File screenshotFolder =
+                new File(System.getProperty("user.dir") + "/TestFailureScreenShots");
+            File[] listOfScreenShotFiles = screenshotFolder.listFiles();
 
-            String file = "/Users/umahaea/Documents/workspace/full-stack-automation/web/TestFailureScreenShots/test2.jpg";
-            String fileName = "attachmentName";
+            System.out.println(screenshotFolder + "/" + listOfScreenShotFiles[0].getName());
+            System.out.println(screenshotFolder + "/" + listOfScreenShotFiles[1].getName());
+            System.out.println(screenshotFolder + "/" + listOfScreenShotFiles[2].getName());
 
-
-            DataSource source = new FileDataSource(file);
-            messageBodyPart.setDataHandler(new DataHandler(source));
-            messageBodyPart.setFileName(fileName);
-            multipart.addBodyPart(messageBodyPart);
-
-
-
-
+            for (int i = 0; i < listOfScreenShotFiles.length; i++) {
+                addAttachment(multipart,
+                    screenshotFolder + "/" + listOfScreenShotFiles[i].getName());
+            }
 
             message.setContent(multipart);
             System.out.println("Sending");
             Transport.send(message);
-
-
-
             System.out.println("Done");
 
         } catch (MessagingException e) {
             e.printStackTrace();
         }
 
+    }
+
+    private void addAttachment(Multipart multipart, String filename) throws MessagingException {
+        DataSource source = new FileDataSource(filename);
+        BodyPart messageBodyPart = new MimeBodyPart();
+        messageBodyPart.setDataHandler(new DataHandler(source));
+        messageBodyPart.setFileName(filename);
+        multipart.addBodyPart(messageBodyPart);
     }
 }
