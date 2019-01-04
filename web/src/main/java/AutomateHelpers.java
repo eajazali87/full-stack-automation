@@ -1,11 +1,10 @@
-import org.apache.commons.io.FileUtils;
-import org.eclipse.jetty.server.Response;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import org.testng.annotations.Listeners;
+
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -460,12 +459,14 @@ public class AutomateHelpers {
         String host = "smtp.gmail.com";
 
         Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
+
+
         props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.host", host);
         props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.connectiontimeout", "2000");
 
-        // Get the Session object.
         Session session = Session.getInstance(props,
             new javax.mail.Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -474,52 +475,44 @@ public class AutomateHelpers {
             });
 
         try {
-            // Create a default MimeMessage object.
+
             Message message = new MimeMessage(session);
-
-            // Set From: header field of the header.
             message.setFrom(new InternetAddress(from));
-
-            // Set To: header field of the header.
             message.setRecipients(Message.RecipientType.TO,
                 InternetAddress.parse(to));
-
-            // Set Subject: header field
             message.setSubject("Testing Subject");
+            message.setText("PFA");
 
-            // Create the message part
-            BodyPart messageBodyPart = new MimeBodyPart();
+            MimeBodyPart messageBodyPart = new MimeBodyPart();
 
-            // Now set the actual message
-            messageBodyPart.setText("This is message body");
-
-            // Create a multipar message
             Multipart multipart = new MimeMultipart();
-
-            // Set text message part
-            multipart.addBodyPart(messageBodyPart);
-
-            // Part two is attachment
             messageBodyPart = new MimeBodyPart();
-            String filename = "Reports";
-            DataSource source = new FileDataSource(System.getProperty("user.dir")+"/TestFailureScreenShots/test2.jpg");
 
+
+            String file = "/Users/umahaea/Documents/workspace/full-stack-automation/web/TestFailureScreenShots/test2.jpg";
+            String fileName = "attachmentName";
+
+
+            DataSource source = new FileDataSource(file);
             messageBodyPart.setDataHandler(new DataHandler(source));
-            messageBodyPart.setFileName(filename);
+            messageBodyPart.setFileName(fileName);
             multipart.addBodyPart(messageBodyPart);
 
-            // Send the complete message parts
-            message.setContent(multipart);
 
-            // Send message
+
+
+
+            message.setContent(multipart);
+            System.out.println("Sending");
             Transport.send(message);
 
-            System.out.println("Sent message successfully....");
+
+
+            System.out.println("Done");
 
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+
     }
-
-
 }

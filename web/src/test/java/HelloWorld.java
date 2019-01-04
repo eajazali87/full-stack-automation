@@ -3,6 +3,8 @@ import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import javax.mail.MessagingException;
+
 
 
 //@Listeners(CustomListener.class)
@@ -23,8 +25,7 @@ public class HelloWorld extends WebBaseClass {
     }
 
     @Test
-    public void test3()
-    {
+    public void test3() throws MessagingException {
         automate.sendReportInEmail();
         Assert.assertEquals(true,true);
     }
