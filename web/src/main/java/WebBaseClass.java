@@ -149,10 +149,8 @@ public class WebBaseClass {
 // -> take screen shot on failure -> Done
 // -> Hook it up with Travis CI -> Done
 
+// -> report integration -> (allure generate is in Progress)
 // -> emailable report -> In Progress
-// -> report integration -> (allure generate is in Progress
-
-
 // -> Add some exception handling cases for incorrect values in the properties files
 // -> Start work on moving common code to shared services
 // -> Add few more unit tests

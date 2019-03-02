@@ -446,7 +446,6 @@ public class AutomateHelpers {
         }
     }
 
-
     public void emailListOfScreenShots() {
 
         Date date = new Date();
