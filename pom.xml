@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.sdeting.utils</groupId>
     <artifactId>full-stack-automation</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <modules>
         <module>web</module>
@@ -16,7 +16,7 @@
 
     <packaging>pom</packaging>
     <name>full-stack-automation</name>
-    <description>A Full Stack Automation</description>
+    <description>A Full Stack Automation for Web, Mobile and Rest APIs</description>
 
     <url>https://github.com/eajazali87/test-utils</url>
     <developers>
