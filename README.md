@@ -1,5 +1,6 @@
 # full-stack-automation for Web, Mobile and Rest APIs
 
+
 ### To automate web applications, add the following dependency
 
         <dependency>
